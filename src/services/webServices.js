@@ -5,6 +5,23 @@ export async function loadProducts() {
   return response;
 }
 
+export async function loadWishes(bId) {
+  const response = httpClientInstance.get("/buyers/getWish?bId=" + bId);
+  return response;
+}
+
+export async function loadCartItems(bId) {
+  const response = httpClientInstance.get("/buyers/getCart?bId=" + bId);
+  return response;
+}
+
+export async function addToWish(bId, pId) {
+  const response = httpClientInstance.get(
+    "/buyers/addWish?bId=" + bId + "&pId=" + pId
+  );
+  return response;
+}
+
 export async function loginBuyer(phone, password) {
   const response = httpClientInstance.get(
     "/buyers/login/?phone=" + phone + "&password=" + password
@@ -12,8 +29,17 @@ export async function loginBuyer(phone, password) {
   return response;
 }
 
-export async function loadReview(id) {
-  const response = httpClientInstance.get("/api/feedbacks/" + id);
+export async function loadProductById(id) {
+  const response = httpClientInstance.get("/buyers/getProduct/?pId=" + id);
+  console.log("API: getting product by id");
+  return response;
+}
+
+export async function addCartItem(pId, bId, quantity) {
+  console.log("webServices called: addCartItem", pId, bId, quantity);
+  const response = httpClientInstance.get(
+    "buyers/addCartItem?pId=" + pId + "&bId=" + bId + "&quantity=" + quantity
+  );
   return response;
 }
 

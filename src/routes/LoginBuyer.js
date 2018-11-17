@@ -115,8 +115,8 @@ class LoginPage extends React.Component {
       <div className={styles.Root}>
         <div>
           <img
-            src="https://i.imgur.com/r8CwlyM.png"
-            alt="Toilet go where"
+            src="https://imgur.com/huYgxAY.png"
+            alt="A1 Marketplace"
             className={styles.Pic}
           />
         </div>

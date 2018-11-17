@@ -4,6 +4,8 @@ export default {
   state: {
     login: false,
     selectedProduct: null,
+    selectedCartItem: null,
+    selectedWish: null,
     user: {}
   },
 

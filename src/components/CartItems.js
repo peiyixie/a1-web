@@ -1,23 +1,23 @@
 import React from "react";
 import { connect } from "dva";
-// import styles from "./Products.css";
-import { loadProducts } from "../services/webServices";
+import { loadCartItems } from "../services/webServices";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
-class Products extends React.Component {
+class CartItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       greeting: "Welcome to a1 marketplace",
-      products: {},
-      selectedProduct: {}
+      cartItems: {},
+      selectedWish: {}
     };
   }
 
   async load() {
-    const response = await loadProducts();
-    console.log(response.data);
+    const response = await loadCartItems(this.props.buyerData.user.id);
+    console.log("getting CartItems for ", this.props.buyerData.user.id);
+    console.log(response);
     this.setState({ data: response.data });
   }
   componentDidMount() {
@@ -33,24 +33,23 @@ class Products extends React.Component {
           filterable
           columns={[
             {
-              Header: "Product",
+              Header: "CartItems",
               columns: [
                 { Header: "Id", accessor: "id" },
-                { Header: "Name", accessor: "name" },
-                { Header: "Category", accessor: "category" }
+                { Header: "Name", accessor: "product.name" },
+                { Header: "Category", accessor: "product.category" }
               ]
             },
             {
-              Header: "Stock info",
+              Header: "Order info",
               columns: [
-                { Header: "Price", accessor: "price" },
+                { Header: "Price", accessor: "product.price" },
                 { Header: "Quantity", accessor: "quantity" }
               ]
             }
           ]}
           defaultPageSize={10}
           className="-striped -highlight"
-          style={{ left: "250 px" }}
           getTrProps={(state, rowInfo) => {
             if (rowInfo && rowInfo.row) {
               return {
@@ -60,10 +59,10 @@ class Products extends React.Component {
                   this.props.dispatch({
                     type: "buyerData/save",
                     payload: {
-                      selectedProduct: rowInfo.row.id
+                      selectedCartItem: rowInfo.row.id
                     }
                   });
-                  console.log(this.props.buyerData.selectedProduct);
+                  console.log(this.props.buyerData.selectedCartItem);
                 },
                 style: {
                   background:
@@ -82,10 +81,10 @@ class Products extends React.Component {
   }
 }
 
-Products.propTypes = {};
+CartItems.propTypes = {};
 
 function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps)(Products);
+export default connect(mapStateToProps)(CartItems);
