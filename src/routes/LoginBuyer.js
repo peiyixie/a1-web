@@ -55,12 +55,6 @@ class LoginPage extends React.Component {
     });
   };
 
-  test() {
-    console.log(this.state.phone);
-    console.log(this.state.password);
-    alert("good");
-  }
-
   async login(phone, password) {
     try {
       console.log("login function");
@@ -70,14 +64,10 @@ class LoginPage extends React.Component {
       console.log("response");
       console.log(response);
 
-      if (!response.data.id || response >= 300) {
-        console.log("no user");
-        alert("Errors logging in");
+      if (!response.data.id || response >= 500) {
+        alert("Errors logging in.");
         return false;
       } else {
-        console.log("have user");
-        localStorage.setItem("user", response.data);
-
         this.props.dispatch({
           type: "buyerData/save",
           payload: {
@@ -166,7 +156,7 @@ class LoginPage extends React.Component {
           onClick={() => {
             this.props.dispatch(
               routerRedux.push({
-                pathname: "/register"
+                pathname: "/buyers/register"
               })
             );
           }}
