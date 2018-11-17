@@ -1,5 +1,22 @@
 import { httpClientInstance } from "../utils/httpClient";
 
+export async function postReviewCall(pId, rating, bId, comment, oiId) {
+  const response = httpClientInstance.get(
+    "/buyers/review?" +
+      "pId=" +
+      pId +
+      "&rating=" +
+      rating +
+      "&bId=" +
+      bId +
+      "&comment=" +
+      comment +
+      "&oiId=" +
+      oiId
+  );
+  return response;
+}
+
 export async function loadProducts() {
   const response = httpClientInstance.get("/buyers");
   return response;

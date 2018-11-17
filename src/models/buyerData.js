@@ -6,7 +6,11 @@ export default {
     selectedProduct: null,
     selectedCartItem: null,
     selectedWish: null,
-    user: {}
+    user: {},
+    selectedOrderItem: null,
+    selectedDelivered: false,
+    rating: 0,
+    comment: ""
   },
 
   subscriptions: {

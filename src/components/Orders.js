@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "dva";
 import { loadOrders } from "../services/webServices";
+import ReviewComponent from "../components/ReviewComponent";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
@@ -9,8 +10,7 @@ class Orders extends React.Component {
     super(props);
     this.state = {
       greeting: "Welcome to a1 marketplace",
-      orders: {},
-      selectedWish: {}
+      orders: {}
     };
   }
 
@@ -20,6 +20,7 @@ class Orders extends React.Component {
     console.log(response);
     this.setState({ data: response.data });
   }
+
   componentDidMount() {
     this.load();
   }
@@ -35,7 +36,8 @@ class Orders extends React.Component {
             {
               Header: "Orders",
               columns: [
-                { Header: "Id", accessor: "id" },
+                { Header: "Product Id", accessor: "product.id" },
+                { Header: "Order Id", accessor: "id" },
                 { Header: "Name", accessor: "product.name" },
                 { Header: "Price", accessor: "price" },
                 { Header: "Quantity", accessor: "quantity" },
@@ -49,15 +51,20 @@ class Orders extends React.Component {
             if (rowInfo && rowInfo.row) {
               return {
                 onClick: e => {
-                  this.setState({ selected: rowInfo.index });
-
+                  this.setState({
+                    selected: rowInfo.index,
+                    selectedDelivered:
+                      rowInfo.row.status === "Delivered" ? true : false
+                  });
                   this.props.dispatch({
                     type: "buyerData/save",
                     payload: {
-                      selectedWish: rowInfo.row.id
+                      selectedOrderItem: rowInfo.row.id,
+                      selectedProduct: rowInfo.row["product.id"]
                     }
                   });
-                  console.log(this.props.buyerData.selectedWish);
+
+                  console.log(this.props.buyerData);
                 },
                 style: {
                   background:
@@ -71,6 +78,7 @@ class Orders extends React.Component {
             }
           }}
         />
+        {this.state.selectedDelivered && <ReviewComponent />}
       </div>
     );
   }
