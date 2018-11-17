@@ -10,7 +10,7 @@ export default {
     checkoutShow: false,
     reviewShow: false,
     cartShow: false,
-    buyerProfileShow: false,
+    profileShow: false,
     infoBarMessage: ""
   },
 
@@ -41,7 +41,7 @@ export default {
           ordersShow: false,
           deleteWishShow: false,
           checkoutShow: false,
-          buyerProfileShow: false,
+          profileShow: false,
           cartShow: false,
           reviewShow: false
         }

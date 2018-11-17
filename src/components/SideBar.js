@@ -13,8 +13,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ProfileIcon from "@material-ui/icons/AccountCircle";
 import RegisterIcon from "@material-ui/icons/AccountBox";
 import LoginIcon from "@material-ui/icons/ExitToApp";
-import { ShoppingCart, Favorite, Home } from "@material-ui/icons";
-import DiscoveryIcon from "@material-ui/icons/AddLocation";
+import { ShoppingCart, Favorite, Home, ListAlt } from "@material-ui/icons";
 import LogoutIcon from "@material-ui/icons/Reply";
 import { connect } from "dva";
 import { routerRedux } from "dva/router";
@@ -122,7 +121,7 @@ class SideBar extends React.Component {
             this.props.dispatch({
               type: "navigator/save",
               payload: {
-                buyerProfileShow: true
+                profileShow: true
               }
             });
           }}
@@ -153,7 +152,27 @@ class SideBar extends React.Component {
           </ListItemIcon>
           Cart
         </ListItem>
+        <ListItem
+          className={styles.report__text}
+          onClick={e => {
+            e.stopPropagation();
+            this.props.dispatch({
+              type: "navigator/clear"
+            });
 
+            this.props.dispatch({
+              type: "navigator/save",
+              payload: {
+                ordersShow: true
+              }
+            });
+          }}
+        >
+          <ListItemIcon>
+            <ListAlt />
+          </ListItemIcon>
+          Orders
+        </ListItem>
         <ListItem
           className={styles.report__text}
           onClick={e => {

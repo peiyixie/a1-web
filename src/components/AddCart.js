@@ -108,6 +108,7 @@ class AddCart extends React.Component {
       return (
         <div className={styles.General}>
           <div className={styles.DisplayOutRat}>
+            <div>{this.state.product.name}</div>
             Rating:
             <Rate
               className={styles.DisplayRat}

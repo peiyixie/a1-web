@@ -15,6 +15,27 @@ export async function loadCartItems(bId) {
   return response;
 }
 
+export async function loadOrders(bId) {
+  const response = httpClientInstance.get("/buyers/getOrder?bId=" + bId);
+  return response;
+}
+
+export async function updateProfileCall(bId, name, email, bank, address) {
+  const response = httpClientInstance.get(
+    "/buyers/updateProfile?bId=" +
+      bId +
+      "&name=" +
+      name +
+      "&email=" +
+      email +
+      "&bank=" +
+      bank +
+      "&address=" +
+      address
+  );
+  return response;
+}
+
 export async function addToWish(bId, pId) {
   const response = httpClientInstance.get(
     "/buyers/addWish?bId=" + bId + "&pId=" + pId
