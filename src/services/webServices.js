@@ -147,6 +147,11 @@ export async function editItem(
   return response;
 }
 
+export async function deleteProduct(pId) {
+  const response = httpClientInstance.get("/sellers/deleteProduct?pId=" + pId);
+  return response;
+}
+
 export async function addToWish(bId, pId) {
   const response = httpClientInstance.get(
     "/buyers/addWish?bId=" + bId + "&pId=" + pId

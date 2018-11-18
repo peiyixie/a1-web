@@ -3,12 +3,8 @@ import { connect } from "dva";
 import stylescss from "./Profile.css";
 import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
-import Avatar from "@material-ui/core/Avatar";
-import classNames from "classnames";
 import { updateProfileCallSeller } from "../services/webServices";
-import { uploadAvatar } from "../services/webServices";
 
 const ProfileContainer = styled.div`
   background-color: #f2f2f2;
@@ -55,10 +51,10 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: this.props.buyerData.user.email,
-      name: this.props.buyerData.user.name,
-      address: this.props.buyerData.user.address,
-      bank: this.props.buyerData.user.bank
+      email: this.props.sellerData.user.email,
+      name: this.props.sellerData.user.name,
+      address: this.props.sellerData.user.address,
+      bank: this.props.sellerData.user.bank
     };
   }
   componentDidMount() {}
@@ -74,12 +70,6 @@ class Profile extends React.Component {
     console.log(this.state);
 
     const updateProfile = async () => {
-      //   const payload = {
-      //     name: this.state["username"],
-      //     email: this.state["email"],
-      //     bank: this.state["bank"],
-      //     address: this.state["address"]
-      //   };
       const response = await updateProfileCallSeller(
         this.props.sellerData.user.id,
         this.state.name,
@@ -87,22 +77,16 @@ class Profile extends React.Component {
         this.state.bank,
         this.state.address
       );
-      //   this.props.dispatch({
-      //     type: "navigator/save",
-      //     payload: {
-      //       infoBarMessage: "Profile Updated"
-      //     }
-      //   });
-      if (response.data.email === "failed") {
-        alert("Update failed!");
-      } else {
-        alert("Uploaded successfully");
+      if (response.data.email !== "failed") {
+        alert("Updated successfully!");
         this.props.dispatch({
-          type: "buyerData/save",
+          type: "sellerData/save",
           payload: {
             user: response.data
           }
         });
+      } else {
+        alert("Update failed");
       }
       console.log(response);
     };
@@ -110,22 +94,6 @@ class Profile extends React.Component {
   };
   render() {
     const { classes } = this.props;
-    // const handleImageUpload = async e => {
-    //   try {
-    //     const formData = new FormData();
-    //     formData.append("pic", e.target.files[0]);
-    //     const response = await uploadAvatar(formData);
-    //     console.log("response.data", response.data);
-    //     let user = this.props.toiletData.currentUser;
-    //     user.avatar = response.data;
-    //     this.props.dispatch({
-    //       type: "toiletData/save",
-    //       payload: {
-    //         currentUser: user
-    //       }
-    //     });
-    //   } catch (error) {}
-    // };
     return (
       <ProfileContainer>
         Update Your Profile

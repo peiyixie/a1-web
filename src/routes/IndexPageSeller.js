@@ -5,6 +5,7 @@ import Products from "../componentsSeller/Products";
 import SideBar from "../componentsSeller/SideBar";
 import Orders from "../componentsSeller/Orders";
 import Profile from "../componentsSeller/Profile";
+import Summary from "../componentsSeller/Summary";
 
 function IndexPageSeller(props) {
   return (
@@ -18,6 +19,8 @@ function IndexPageSeller(props) {
       {props.navigatorSeller.profileShow && <Profile />}
 
       {props.navigatorSeller.ordersShow && <Orders />}
+
+      {props.navigatorSeller.chartShow && <Summary />}
     </div>
   );
 }

@@ -2,8 +2,6 @@ import React from "react";
 import { connect } from "dva";
 import styles from "./AddCart.css";
 import { Rate, InputNumber } from "antd";
-import Avatar from "@material-ui/core/Avatar";
-import CardMedia from "@material-ui/core/CardMedia";
 
 import styled from "styled-components";
 import {
@@ -21,6 +19,7 @@ const ImageContainer = styled.div`
   color: #fff;
   font-size: 18px;
   font-weight: 500;
+  height: 265px;
   box-sizing: border-box;
   position: absolute;
   bottom: 0;

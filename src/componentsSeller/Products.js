@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "dva";
 import "./react-table.css";
-import { loadProductsSeller } from "../services/webServices";
+import { loadProductsSeller, deleteProduct } from "../services/webServices";
 import ReactTable from "react-table";
 import styled from "styled-components";
 import { routerRedux } from "dva/router";
@@ -62,6 +62,14 @@ class Products extends React.Component {
     console.log(response.data);
     this.setState({ data: response.data });
   }
+
+  async delete() {
+    const response = await deleteProduct(this.props.sellerData.selectedProduct);
+    console.log(response.data);
+    alert(response.data.filename);
+    this.load();
+  }
+
   componentDidMount() {
     this.load();
   }
@@ -119,33 +127,32 @@ class Products extends React.Component {
             }
           }}
         />
-
         <ConfirmationContainer>
-          <ConfirmationButton
-            onClick={e => {
-              e.stopPropagation();
-              this.props.dispatch({
-                type: "navigatorSeller/clear"
-              });
+          {this.props.sellerData.selectedProduct && (
+            <ConfirmationButton
+              onClick={e => {
+                e.stopPropagation();
+                this.props.dispatch({
+                  type: "navigatorSeller/clear"
+                });
 
-              this.props.dispatch(
-                routerRedux.push({ pathname: "/sellers/editItem" })
-              );
-            }}
-          >
-            Edit Prodct
-          </ConfirmationButton>
+                this.props.dispatch(
+                  routerRedux.push({ pathname: "/sellers/editItem" })
+                );
+              }}
+            >
+              Edit Prodct
+            </ConfirmationButton>
+          )}
         </ConfirmationContainer>
 
-        {/* 
-        Pending delete product
         <ConfirmationContainer>
-          {this.state.selectedCartItem && (
-            <DeleteButton onClick={() => this.deleteProduct()}>
+          {this.props.sellerData.selectedProduct && (
+            <DeleteButton onClick={() => this.delete()}>
               Delete this item
             </DeleteButton>
           )}
-        </ConfirmationContainer> */}
+        </ConfirmationContainer>
       </div>
     );
   }

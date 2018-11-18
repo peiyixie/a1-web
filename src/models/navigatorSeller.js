@@ -38,7 +38,8 @@ export default {
           checkoutShow: false,
           profileShow: false,
           cartShow: false,
-          reviewShow: false
+          reviewShow: false,
+          chartShow: false
         }
       };
     }
