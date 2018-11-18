@@ -8,8 +8,13 @@ const app = dva();
 // app.use({});
 
 // 3. Model
+//buyer
 app.model(require("./models/buyerData").default);
 app.model(require("./models/navigator").default);
+
+//seller
+app.model(require("./models/sellerData").default);
+app.model(require("./models/navigatorSeller").default);
 
 // 4. Router
 app.router(require("./router").default);

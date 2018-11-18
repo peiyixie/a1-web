@@ -47,6 +47,11 @@ export async function loadOrders(bId) {
   return response;
 }
 
+export async function loadOrdersSeller(sId) {
+  const response = httpClientInstance.get("/sellers/getOrder?sId=" + sId);
+  return response;
+}
+
 export async function updateProfileCall(bId, name, email, bank, address) {
   const response = httpClientInstance.get(
     "/buyers/updateProfile?bId=" +
@@ -63,6 +68,60 @@ export async function updateProfileCall(bId, name, email, bank, address) {
   return response;
 }
 
+export async function updateProfileCallSeller(sId, name, email, bank, address) {
+  const response = httpClientInstance.get(
+    "/sellers/updateProfile?sId=" +
+      sId +
+      "&name=" +
+      name +
+      "&email=" +
+      email +
+      "&bank=" +
+      bank +
+      "&address=" +
+      address
+  );
+  return response;
+}
+
+`const response = await addItem(
+        this.props.sellerData.user.id,
+        this.state.name,
+        this.state.description,
+        this.state.url,
+        this.state.quantity,
+        this.state.price,
+        this.state.category
+      );`;
+
+export async function addItem(
+  sId,
+  name,
+  description,
+  url,
+  quantity,
+  price,
+  category
+) {
+  const response = httpClientInstance.get(
+    "/sellers/createProduct?sId=" +
+      sId +
+      "&name=" +
+      name +
+      "&description=" +
+      description +
+      "&filename=" +
+      url +
+      "&quantity=" +
+      quantity +
+      "&price=" +
+      price +
+      "&category=" +
+      category
+  );
+  return response;
+}
+
 export async function addToWish(bId, pId) {
   const response = httpClientInstance.get(
     "/buyers/addWish?bId=" + bId + "&pId=" + pId
@@ -74,6 +133,18 @@ export async function loginBuyer(phone, password) {
   const response = httpClientInstance.get(
     "/buyers/login/?phone=" + phone + "&password=" + password
   );
+  return response;
+}
+
+export async function loginSeller(phone, password) {
+  const response = httpClientInstance.get(
+    "/sellers/login/?phone=" + phone + "&password=" + password
+  );
+  return response;
+}
+
+export async function loadProductsSeller(sId) {
+  const response = httpClientInstance.get("/sellers/products?sId=" + sId);
   return response;
 }
 
@@ -102,6 +173,32 @@ export async function registerBuyer(
   // console.log("webServices called: register buyer", name, phone, email);
   const response = httpClientInstance.get(
     "buyers/register?name=" +
+      name +
+      "&bank=" +
+      bank +
+      "&address=" +
+      address +
+      "&email=" +
+      email +
+      "&phone=" +
+      phone +
+      "&password=" +
+      password
+  );
+  return response;
+}
+
+export async function registerSeller(
+  name,
+  address,
+  bank,
+  phone,
+  email,
+  password
+) {
+  // console.log("webServices called: register buyer", name, phone, email);
+  const response = httpClientInstance.get(
+    "sellers/register?name=" +
       name +
       "&bank=" +
       bank +

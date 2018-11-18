@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "dva";
 import "./react-table.css";
-import { loadProducts } from "../services/webServices";
+import { loadProductsSeller } from "../services/webServices";
 import ReactTable from "react-table";
-import "react-table/react-table.css";
+// import "react-table/react-table.css";
 
 class Products extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class Products extends React.Component {
   }
 
   async load() {
-    const response = await loadProducts();
+    const response = await loadProductsSeller(this.props.sellerData.user.id);
     console.log(response.data);
     this.setState({ data: response.data });
   }
@@ -58,12 +58,12 @@ class Products extends React.Component {
                   this.setState({ selected: rowInfo.index });
 
                   this.props.dispatch({
-                    type: "buyerData/save",
+                    type: "sellerData/save",
                     payload: {
                       selectedProduct: rowInfo.row.id
                     }
                   });
-                  console.log(this.props.buyerData.selectedProduct);
+                  console.log(this.props.sellerData.selectedProduct);
                 },
                 style: {
                   background:

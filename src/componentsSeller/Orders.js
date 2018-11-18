@@ -1,25 +1,26 @@
 import React from "react";
 import { connect } from "dva";
-import "./react-table.css";
-import { loadProducts } from "../services/webServices";
+import { loadOrdersSeller } from "../services/webServices";
+import ReviewComponent from "../components/ReviewComponent";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
-class Products extends React.Component {
+class Orders extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       greeting: "Welcome to a1 marketplace",
-      products: {},
-      selectedProduct: {}
+      orders: {}
     };
   }
 
   async load() {
-    const response = await loadProducts();
-    console.log(response.data);
+    const response = await loadOrdersSeller(this.props.sellerData.user.id);
+    console.log("getting orders for ", this.props.sellerData.user.id);
+    console.log(response);
     this.setState({ data: response.data });
   }
+
   componentDidMount() {
     this.load();
   }
@@ -33,37 +34,37 @@ class Products extends React.Component {
           filterable
           columns={[
             {
-              Header: "Product",
+              Header: "Orders",
               columns: [
-                { Header: "Id", accessor: "id" },
-                { Header: "Name", accessor: "name" },
-                { Header: "Category", accessor: "category" }
-              ]
-            },
-            {
-              Header: "Stock info",
-              columns: [
+                { Header: "Product Id", accessor: "product.id" },
+                { Header: "Order Id", accessor: "id" },
+                { Header: "Name", accessor: "product.name" },
                 { Header: "Price", accessor: "price" },
-                { Header: "Quantity", accessor: "quantity" }
+                { Header: "Quantity", accessor: "quantity" },
+                { Header: "Status", accessor: "status" }
               ]
             }
           ]}
           defaultPageSize={10}
           className="-striped -highlight"
-          style={{ left: "250 px" }}
           getTrProps={(state, rowInfo) => {
             if (rowInfo && rowInfo.row) {
               return {
                 onClick: e => {
-                  this.setState({ selected: rowInfo.index });
-
+                  this.setState({
+                    selected: rowInfo.index,
+                    selectedDelivered:
+                      rowInfo.row.status === "Delivered" ? true : false
+                  });
                   this.props.dispatch({
-                    type: "buyerData/save",
+                    type: "sellerData/save",
                     payload: {
-                      selectedProduct: rowInfo.row.id
+                      selectedOrderItem: rowInfo.row.id,
+                      selectedProduct: rowInfo.row["product.id"]
                     }
                   });
-                  console.log(this.props.buyerData.selectedProduct);
+
+                  console.log(this.props.sellerData);
                 },
                 style: {
                   background:
@@ -77,15 +78,16 @@ class Products extends React.Component {
             }
           }}
         />
+        {!this.state.selectedDelivered && <ReviewComponent />}
       </div>
     );
   }
 }
 
-Products.propTypes = {};
+Orders.propTypes = {};
 
 function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps)(Products);
+export default connect(mapStateToProps)(Orders);
