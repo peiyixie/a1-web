@@ -115,7 +115,7 @@ class AddItemPage extends React.Component {
     this.setState({
       name: product.name,
       description: product.description,
-      url: product.filenmae,
+      url: product.filename,
       quantity: product.quantity,
       price: product.price,
       category: product.category
