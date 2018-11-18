@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "dva";
 import { loadOrdersSeller } from "../services/webServices";
-import ReviewComponent from "../components/ReviewComponent";
+import StatusComponent from "../componentsSeller/StatusComponent";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
@@ -78,7 +78,10 @@ class Orders extends React.Component {
             }
           }}
         />
-        {!this.state.selectedDelivered && <ReviewComponent />}
+        {!this.state.selectedDelivered &&
+          this.props.sellerData.selectedOrderItem && (
+            <StatusComponent onClick={() => this.load()} />
+          )}
       </div>
     );
   }

@@ -3,7 +3,7 @@ import { connect } from "dva";
 import styles from "./RegistrationPage.css";
 import TextField from "@material-ui/core/TextField";
 
-import { addItem } from "../services/webServices";
+import { editItem, loadProductById } from "../services/webServices";
 import styled from "styled-components";
 import "antd/dist/antd.css";
 import { routerRedux } from "dva/router";
@@ -76,8 +76,8 @@ class AddItemPage extends React.Component {
 
   async register() {
     try {
-      const response = await addItem(
-        this.props.sellerData.user.id,
+      const response = await editItem(
+        this.props.sellerData.selectedProduct,
         this.state.name,
         this.state.description,
         this.state.url,
@@ -88,7 +88,7 @@ class AddItemPage extends React.Component {
       console.log(response);
 
       if (response.data.filename !== "failed") {
-        alert("Item " + response.data.name + " created successfully.");
+        alert("Item " + response.data.name + " updated successfully.");
 
         this.props.dispatch(
           routerRedux.push({
@@ -105,7 +105,26 @@ class AddItemPage extends React.Component {
     }
   }
 
-  componentDidMount() {}
+  async load() {
+    const response = await loadProductById(
+      this.props.sellerData.selectedProduct
+    );
+
+    console.log(response.data);
+    const product = response.data;
+    this.setState({
+      name: product.name,
+      description: product.description,
+      url: product.filenmae,
+      quantity: product.quantity,
+      price: product.price,
+      category: product.category
+    });
+  }
+
+  componentDidMount() {
+    this.load();
+  }
   componentWillUnmount() {}
 
   onChange = e => {
@@ -117,7 +136,7 @@ class AddItemPage extends React.Component {
     return (
       <div className={styles.Root}>
         <div>
-          <h1> Add a new Item </h1>
+          <h1> Edit an Item {this.props.sellerData.selectedProduct}</h1>
         </div>
 
         <div className={styles.textField}>

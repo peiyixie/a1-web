@@ -18,16 +18,6 @@ function IndexPageSeller(props) {
       {props.navigatorSeller.profileShow && <Profile />}
 
       {props.navigatorSeller.ordersShow && <Orders />}
-
-      {/*
-      
-
-       */}
-
-      {/* {props.sellerData.selectedProduct &&
-        props.navigatorSeller.editProductShow && (
-          <EditOrder style={{ left: "250 px" }} />
-        )} */}
     </div>
   );
 }

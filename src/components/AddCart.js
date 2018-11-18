@@ -2,13 +2,33 @@ import React from "react";
 import { connect } from "dva";
 import styles from "./AddCart.css";
 import { Rate, InputNumber } from "antd";
+import Avatar from "@material-ui/core/Avatar";
+import CardMedia from "@material-ui/core/CardMedia";
 
+import styled from "styled-components";
 import {
   loadProductById,
   addCartItem,
   addToWish
 } from "../services/webServices";
 
+//image container TODO
+const ImageContainer = styled.div`
+  border-radius: 0px;
+  transform: translate(1%, 3%);
+  cursor: pointer;
+  background: transparent;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+  z-index = 1000;
+  align-items: center;
+  text-align: center;
+`;
 class AddCart extends React.Component {
   constructor(props) {
     super(props);
@@ -107,8 +127,18 @@ class AddCart extends React.Component {
     {
       return (
         <div className={styles.General}>
+          <ImageContainer>
+            <img
+              width="150px"
+              src={
+                this.state.product.filename ||
+                "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
+              }
+            />
+          </ImageContainer>
+
           <div className={styles.Display}>
-            <div>{this.state.product.name}</div>
+            <div>{this.state.product.name + "'s "} </div>
             Rating:
             <Rate
               className={styles.DisplayRat}

@@ -1,5 +1,12 @@
 import { httpClientInstance } from "../utils/httpClient";
 
+export async function changeStatus(oId, status) {
+  const response = httpClientInstance.get(
+    "/sellers/setStatus?oId=" + oId + "&status=" + status
+  );
+  return response;
+}
+
 export async function postReviewCall(pId, rating, bId, comment, oiId) {
   const response = httpClientInstance.get(
     "/buyers/review?" +
@@ -84,16 +91,6 @@ export async function updateProfileCallSeller(sId, name, email, bank, address) {
   return response;
 }
 
-`const response = await addItem(
-        this.props.sellerData.user.id,
-        this.state.name,
-        this.state.description,
-        this.state.url,
-        this.state.quantity,
-        this.state.price,
-        this.state.category
-      );`;
-
 export async function addItem(
   sId,
   name,
@@ -106,6 +103,34 @@ export async function addItem(
   const response = httpClientInstance.get(
     "/sellers/createProduct?sId=" +
       sId +
+      "&name=" +
+      name +
+      "&description=" +
+      description +
+      "&filename=" +
+      url +
+      "&quantity=" +
+      quantity +
+      "&price=" +
+      price +
+      "&category=" +
+      category
+  );
+  return response;
+}
+
+export async function editItem(
+  pId,
+  name,
+  description,
+  url,
+  quantity,
+  price,
+  category
+) {
+  const response = httpClientInstance.get(
+    "/sellers/editProduct?pId=" +
+      pId +
       "&name=" +
       name +
       "&description=" +

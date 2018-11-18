@@ -139,7 +139,7 @@ class CartItems extends React.Component {
         />
         <ConfirmationContainer>
           <ConfirmationButton onClick={() => this.checkout()}>
-            Add to Cart
+            Checkout Cart
           </ConfirmationButton>
         </ConfirmationContainer>
 
