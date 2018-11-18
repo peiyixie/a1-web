@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "dva";
 import { loadWishes } from "../services/webServices";
 import ReactTable from "react-table";
-import "react-table/react-table.css";
+import "./react-table.css";
 
 class Wishes extends React.Component {
   constructor(props) {

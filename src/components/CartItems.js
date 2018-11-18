@@ -6,7 +6,7 @@ import {
   deleteCartItemCall
 } from "../services/webServices";
 import ReactTable from "react-table";
-import "react-table/react-table.css";
+import "./react-table.css";
 import styled from "styled-components";
 
 const ConfirmationContainer = styled.div`

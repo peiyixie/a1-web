@@ -9,7 +9,7 @@ import { postReviewCall } from "../services/webServices";
 const { TextArea } = Input;
 
 const RatingContainer = styled.div`
-  height: 200px;
+  height: 265px;
   width: 100%;
   text-align: center;
   color: #4169e1;

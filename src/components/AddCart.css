@@ -21,19 +21,6 @@
   align-items: center;
 }
 
-.DisplayConfirm {
-  height: 50px;
-  margin-top: 11px;
-  margin-left: 11px;
-  margin-right: 28px;
-  margin-bottom: 11px;
-  color: #4169e1;
-  display: flex;
-  justify-content: flex-start;
-  box-sizing: border-box;
-  align-items: center;
-}
-
 .DisplayOutRat {
   height: 40px;
   padding: 11px;
@@ -46,14 +33,6 @@
 
 .DisplayRat {
   height: 40px;
-  padding: 11px;
-  display: flex;
-  justify-content: flex-start;
-  box-sizing: border-box;
-  align-items: center;
-}
-
-.DisplayCar {
   padding: 11px;
   display: flex;
   justify-content: flex-start;
@@ -84,8 +63,10 @@
 
 .Button {
   height: 40px;
-  width: 50px;
+  width: 150px;
   margin-left: 20px;
+  position: relative;
+  left: calc(50% - 240px);
   border-radius: 5px;
   cursor: pointer;
   background: linear-gradient(-45deg, #4169e1, #7363d6);
@@ -93,4 +74,5 @@
   color: #fff;
   box-sizing: border-box;
   padding-top: 7px;
+  margin-top: 10px;
 }

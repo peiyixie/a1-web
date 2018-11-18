@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "dva";
-// import styles from "./Products.css";
+import "./react-table.css";
 import { loadProducts } from "../services/webServices";
 import ReactTable from "react-table";
-import "react-table/react-table.css";
+// import "react-table/react-table.css";
 
 class Products extends React.Component {
   constructor(props) {

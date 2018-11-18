@@ -130,7 +130,7 @@ class AddCart extends React.Component {
           />
 
           <div
-            className={styles.Display}
+            className={styles.Button}
             onClick={() => {
               if (this.props.buyerData.user.id) {
                 this.addToCart();
@@ -143,7 +143,7 @@ class AddCart extends React.Component {
           </div>
 
           <div
-            className={styles.Display}
+            className={styles.Button}
             onClick={() => {
               if (this.props.buyerData.user.id) {
                 this.addToWishlist();
