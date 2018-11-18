@@ -1,4 +1,4 @@
-## Running Instruction
+## Installation
 
 ```bash
 # install dependencies
