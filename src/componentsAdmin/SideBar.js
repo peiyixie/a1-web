@@ -13,7 +13,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ProfileIcon from "@material-ui/icons/AccountCircle";
 import RegisterIcon from "@material-ui/icons/AccountBox";
 import LoginIcon from "@material-ui/icons/ExitToApp";
-import { ShoppingCart, Favorite, Home, ListAlt } from "@material-ui/icons";
+import { Home } from "@material-ui/icons";
 import LogoutIcon from "@material-ui/icons/Reply";
 import { connect } from "dva";
 import { routerRedux } from "dva/router";
@@ -91,13 +91,12 @@ class SideBar extends React.Component {
           className={styles.profile__text}
           onClick={e => {
             e.stopPropagation();
-            this.props.dispatch({ type: "navigator/clear" });
+            this.props.dispatch({ type: "navigatorAdmin/clear" });
 
             this.props.dispatch({
-              type: "navigator/save",
+              type: "navigatorAdmin/save",
               payload: {
-                productsShow: true,
-                addCartShow: true
+                buyerShow: true
               }
             });
           }}
@@ -105,19 +104,19 @@ class SideBar extends React.Component {
           <ListItemIcon>
             <Home />
           </ListItemIcon>
-          Home
+          Buyers
         </ListItem>
 
         <ListItem
           className={styles.profile__text}
           onClick={e => {
             e.stopPropagation();
-            this.props.dispatch({ type: "navigator/clear" });
+            this.props.dispatch({ type: "navigatorAdmin/clear" });
 
             this.props.dispatch({
-              type: "navigator/save",
+              type: "navigatorAdmin/save",
               payload: {
-                profileShow: true
+                sellerShow: true
               }
             });
           }}
@@ -125,65 +124,7 @@ class SideBar extends React.Component {
           <ListItemIcon>
             <ProfileIcon />
           </ListItemIcon>
-          Profile
-        </ListItem>
-        <ListItem
-          className={styles.report__text}
-          onClick={e => {
-            e.stopPropagation();
-            this.props.dispatch({ type: "navigator/clear" });
-
-            this.props.dispatch({
-              type: "navigator/save",
-              payload: {
-                cartShow: true
-              }
-            });
-          }}
-        >
-          <ListItemIcon>
-            <ShoppingCart />
-          </ListItemIcon>
-          Cart
-        </ListItem>
-        <ListItem
-          className={styles.report__text}
-          onClick={e => {
-            e.stopPropagation();
-            this.props.dispatch({ type: "navigator/clear" });
-
-            this.props.dispatch({
-              type: "navigator/save",
-              payload: {
-                ordersShow: true
-              }
-            });
-          }}
-        >
-          <ListItemIcon>
-            <ListAlt />
-          </ListItemIcon>
-          Orders
-        </ListItem>
-        <ListItem
-          className={styles.report__text}
-          onClick={e => {
-            e.stopPropagation();
-
-            this.props.dispatch({ type: "navigator/clear" });
-
-            this.props.dispatch({
-              type: "navigator/save",
-              payload: {
-                wishesShow: true
-              }
-            });
-          }}
-        >
-          <ListItemIcon>
-            <Favorite />
-          </ListItemIcon>
-          Wishlist
+          Sellers
         </ListItem>
 
         <ListItem
@@ -191,21 +132,13 @@ class SideBar extends React.Component {
           onClick={e => {
             e.stopPropagation();
             this.props.dispatch({
-              type: "buyerData/save",
+              type: "adminData/save",
               payload: {
                 login: false,
                 user: {}
               }
             });
-            this.props.dispatch({ type: "navigator/clear" });
-
-            this.props.dispatch({
-              type: "navigator/save",
-              payload: {
-                addCartShow: true,
-                productsShow: true
-              }
-            });
+            this.props.dispatch({ type: "navigatorAdmin/clear" });
 
             this.handleDrawerToggle();
           }}
@@ -220,26 +153,34 @@ class SideBar extends React.Component {
           className={styles.profile__text}
           onClick={e => {
             e.stopPropagation();
-            this.props.dispatch(routerRedux.push({ pathname: "/sellers" }));
+            this.props.dispatch(
+              routerRedux.push({
+                pathname: "/"
+              })
+            );
           }}
         >
           <ListItemIcon>
             <LoginIcon />
           </ListItemIcon>
-          Sellers Page
+          Buyers Page
         </ListItem>
 
         <ListItem
           className={styles.profile__text}
           onClick={e => {
             e.stopPropagation();
-            this.props.dispatch(routerRedux.push({ pathname: "/admin" }));
+            this.props.dispatch(
+              routerRedux.push({
+                pathname: "/sellers"
+              })
+            );
           }}
         >
           <ListItemIcon>
             <LoginIcon />
           </ListItemIcon>
-          Admin Page
+          Sellers Page
         </ListItem>
       </List>
     );
@@ -251,7 +192,7 @@ class SideBar extends React.Component {
             e.stopPropagation();
             this.props.dispatch(
               routerRedux.push({
-                pathname: "/buyers/login"
+                pathname: "/admin/login"
               })
             );
           }}
@@ -261,21 +202,18 @@ class SideBar extends React.Component {
           </ListItemIcon>
           Login
         </ListItem>
+
         <ListItem
-          className={styles.report__text}
+          className={styles.profile__text}
           onClick={e => {
             e.stopPropagation();
-            this.props.dispatch(
-              routerRedux.push({
-                pathname: "/buyers/register"
-              })
-            );
+            this.props.dispatch(routerRedux.push({ pathname: "/" }));
           }}
         >
           <ListItemIcon>
-            <RegisterIcon />
+            <LoginIcon />
           </ListItemIcon>
-          Register
+          Buyers Page
         </ListItem>
 
         <ListItem
@@ -290,23 +228,10 @@ class SideBar extends React.Component {
           </ListItemIcon>
           Sellers Page
         </ListItem>
-
-        <ListItem
-          className={styles.profile__text}
-          onClick={e => {
-            e.stopPropagation();
-            this.props.dispatch(routerRedux.push({ pathname: "/admin" }));
-          }}
-        >
-          <ListItemIcon>
-            <LoginIcon />
-          </ListItemIcon>
-          Admin Page
-        </ListItem>
       </List>
     );
 
-    const isLoggedIn = this.props.buyerData.login;
+    const isLoggedIn = this.props.adminData.login;
     let displayMenu;
     if (isLoggedIn) {
       displayMenu = sidebar;
@@ -317,9 +242,7 @@ class SideBar extends React.Component {
     const drawer = (
       <div>
         <div className={classes.toolbar} />
-        Buyers Page
-        <br />
-        {this.props.buyerData.login && this.props.buyerData.user.name}
+        Admin Page
         <Divider />
         {displayMenu}
       </div>

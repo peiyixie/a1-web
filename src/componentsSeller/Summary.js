@@ -12,7 +12,6 @@ const Div = styled.div`
   height: 100%;
 `;
 
-// import styles from "./Summary.css";
 class Summary extends React.Component {
   constructor(props) {
     super(props);
@@ -61,7 +60,9 @@ class Summary extends React.Component {
   render() {
     return (
       <Div>
-        {this.state.total > 0 && <PieChart data={this.state.pie}> </PieChart>}
+        {this.state.total > 0 && (
+          <PieChart expandOnHover data={this.state.pie} />
+        )}
 
         {this.state.total === 0 && <h1> No orders yet. </h1>}
       </Div>

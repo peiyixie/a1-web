@@ -16,6 +16,10 @@ app.model(require("./models/navigator").default);
 app.model(require("./models/sellerData").default);
 app.model(require("./models/navigatorSeller").default);
 
+//admin
+app.model(require("./models/navigatorAdmin").default);
+app.model(require("./models/adminData").default);
+
 // 4. Router
 app.router(require("./router").default);
 

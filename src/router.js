@@ -12,6 +12,10 @@ import RegistrationSeller from "./routes/RegistrationSeller";
 import AddItemPage from "./routes/AddItemPage";
 import EditItemPage from "./routes/EditItemPage";
 
+//admin
+import IndexPageAdmin from "./routes/IndexPageAdmin";
+import LoginAdmin from "./routes/LoginAdmin";
+
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
@@ -26,6 +30,10 @@ function RouterConfig({ history }) {
         <Route path="/sellers/register" exact component={RegistrationSeller} />
         <Route path="/sellers/addItem" exact component={AddItemPage} />
         <Route path="/sellers/editItem" exact component={EditItemPage} />
+
+        {/* admin */}
+        <Route path="/admin" exact component={IndexPageAdmin} />
+        <Route path="/admin/login" exact component={LoginAdmin} />
       </Switch>
     </Router>
   );

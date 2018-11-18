@@ -1,5 +1,29 @@
 import { httpClientInstance } from "../utils/httpClient";
 
+export async function getBuyers() {
+  const response = httpClientInstance.get("/sellers/admin/getBuyers");
+  return response;
+}
+
+export async function getSellers() {
+  const response = httpClientInstance.get("/sellers/admin/getSellers");
+  return response;
+}
+
+export async function deactivate(id, type) {
+  if (type === 1) {
+    const response = httpClientInstance.get(
+      "/sellers/admin/deactivateBuyer?id=" + id
+    );
+    return response;
+  } else {
+    const response = httpClientInstance.get(
+      "/sellers/admin/deactivateSeller?id=" + id
+    );
+    return response;
+  }
+}
+
 export async function changeStatus(oId, status) {
   const response = httpClientInstance.get(
     "/sellers/setStatus?oId=" + oId + "&status=" + status

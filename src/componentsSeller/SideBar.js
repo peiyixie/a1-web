@@ -91,9 +91,7 @@ class SideBar extends React.Component {
           className={styles.profile__text}
           onClick={e => {
             e.stopPropagation();
-            this.props.dispatch({
-              type: "navigatorSeller/clear"
-            });
+            this.props.dispatch({ type: "navigatorSeller/clear" });
 
             this.props.dispatch({
               type: "navigatorSeller/save",
@@ -114,9 +112,7 @@ class SideBar extends React.Component {
           className={styles.profile__text}
           onClick={e => {
             e.stopPropagation();
-            this.props.dispatch({
-              type: "navigatorSeller/clear"
-            });
+            this.props.dispatch({ type: "navigatorSeller/clear" });
 
             this.props.dispatch({
               type: "navigatorSeller/save",
@@ -135,12 +131,12 @@ class SideBar extends React.Component {
           className={styles.report__text}
           onClick={e => {
             e.stopPropagation();
-            this.props.dispatch({
-              type: "navigatorSeller/clear"
-            });
+            this.props.dispatch({ type: "navigatorSeller/clear" });
 
             this.props.dispatch(
-              routerRedux.push({ pathname: "/sellers/addItem" })
+              routerRedux.push({
+                pathname: "/sellers/addItem"
+              })
             );
           }}
         >
@@ -153,9 +149,7 @@ class SideBar extends React.Component {
           className={styles.report__text}
           onClick={e => {
             e.stopPropagation();
-            this.props.dispatch({
-              type: "navigatorSeller/clear"
-            });
+            this.props.dispatch({ type: "navigatorSeller/clear" });
 
             this.props.dispatch({
               type: "navigatorSeller/save",
@@ -175,9 +169,7 @@ class SideBar extends React.Component {
           onClick={e => {
             e.stopPropagation();
 
-            this.props.dispatch({
-              type: "navigatorSeller/clear"
-            });
+            this.props.dispatch({ type: "navigatorSeller/clear" });
 
             this.props.dispatch({
               type: "navigatorSeller/save",
@@ -204,9 +196,7 @@ class SideBar extends React.Component {
                 user: {}
               }
             });
-            this.props.dispatch({
-              type: "navigatorSeller/clear"
-            });
+            this.props.dispatch({ type: "navigatorSeller/clear" });
 
             this.handleDrawerToggle();
           }}
@@ -215,6 +205,31 @@ class SideBar extends React.Component {
             <LogoutIcon />
           </ListItemIcon>
           Logout
+        </ListItem>
+        <ListItem
+          className={styles.profile__text}
+          onClick={e => {
+            e.stopPropagation();
+            this.props.dispatch(routerRedux.push({ pathname: "/" }));
+          }}
+        >
+          <ListItemIcon>
+            <LoginIcon />
+          </ListItemIcon>
+          Buyers Page
+        </ListItem>
+
+        <ListItem
+          className={styles.profile__text}
+          onClick={e => {
+            e.stopPropagation();
+            this.props.dispatch(routerRedux.push({ pathname: "/admin" }));
+          }}
+        >
+          <ListItemIcon>
+            <LoginIcon />
+          </ListItemIcon>
+          Admin Page
         </ListItem>
       </List>
     );
@@ -225,7 +240,9 @@ class SideBar extends React.Component {
           onClick={e => {
             e.stopPropagation();
             this.props.dispatch(
-              routerRedux.push({ pathname: "/sellers/login" })
+              routerRedux.push({
+                pathname: "/sellers/login"
+              })
             );
           }}
         >
@@ -239,7 +256,9 @@ class SideBar extends React.Component {
           onClick={e => {
             e.stopPropagation();
             this.props.dispatch(
-              routerRedux.push({ pathname: "/sellers/register" })
+              routerRedux.push({
+                pathname: "/sellers/register"
+              })
             );
           }}
         >
@@ -247,6 +266,31 @@ class SideBar extends React.Component {
             <RegisterIcon />
           </ListItemIcon>
           Register
+        </ListItem>
+        <ListItem
+          className={styles.profile__text}
+          onClick={e => {
+            e.stopPropagation();
+            this.props.dispatch(routerRedux.push({ pathname: "/" }));
+          }}
+        >
+          <ListItemIcon>
+            <LoginIcon />
+          </ListItemIcon>
+          Buyers Page
+        </ListItem>
+
+        <ListItem
+          className={styles.profile__text}
+          onClick={e => {
+            e.stopPropagation();
+            this.props.dispatch(routerRedux.push({ pathname: "/admin" }));
+          }}
+        >
+          <ListItemIcon>
+            <LoginIcon />
+          </ListItemIcon>
+          Admin Page
         </ListItem>
       </List>
     );
@@ -262,8 +306,9 @@ class SideBar extends React.Component {
     const drawer = (
       <div>
         <div className={classes.toolbar} />
-        Welcome to A1 Marketplace
-        {this.props.sellerData.login && ", " + this.props.sellerData.user.name}
+        Sellers Page
+        <br />
+        {this.props.sellerData.login && this.props.sellerData.user.name}
         <Divider />
         {displayMenu}
       </div>
