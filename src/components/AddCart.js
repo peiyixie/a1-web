@@ -107,7 +107,7 @@ class AddCart extends React.Component {
     {
       return (
         <div className={styles.General}>
-          <div className={styles.DisplayOutRat}>
+          <div className={styles.Display}>
             <div>{this.state.product.name}</div>
             Rating:
             <Rate
@@ -120,6 +120,7 @@ class AddCart extends React.Component {
           <div className={styles.Display}>{this.state.numRating} Ratings</div>
 
           <InputNumber
+            className={styles.Display}
             min={1}
             max={this.state.product.quantity}
             defaultValue={this.state.product.quantity}
@@ -129,11 +130,7 @@ class AddCart extends React.Component {
           />
 
           <div
-            style={{
-              width: "100%",
-              textAlign: "center",
-              color: "#4169e1"
-            }}
+            className={styles.Display}
             onClick={() => {
               if (this.props.buyerData.user.id) {
                 this.addToCart();
@@ -146,11 +143,7 @@ class AddCart extends React.Component {
           </div>
 
           <div
-            style={{
-              width: "100%",
-              textAlign: "center",
-              color: "#4169e1"
-            }}
+            className={styles.Display}
             onClick={() => {
               if (this.props.buyerData.user.id) {
                 this.addToWishlist();
